@@ -8,7 +8,7 @@ STEM = '│   '
 LEAF = '├── '
 LEAF_LAST = '└── '
 
-# python implementaion of bash "tree" command
+
 def tree(path):
     result = path + '\n'
     [result_r, dir_ct_r, file_ct_r] = \
@@ -29,7 +29,6 @@ def tree_helper(path, dir_ct, file_ct, prefix):
     		last_dir = entry
 
     for i in range(len(entries)):
-        # root_last_r = 0  ## root_last value for recursive call
         # ignore hidden files
         entry = entries[i]
         if str(entry)[0] == '.':
@@ -38,21 +37,11 @@ def tree_helper(path, dir_ct, file_ct, prefix):
         # determine leaf representaion
         prefix_r = prefix
         if i == len(entries) - 1:
-            # root_last_r = 1
             result += (prefix + LEAF_LAST + entry + '\n')
             prefix_r += BLANK
-            # prefix = get_prefix(root_last, 1, level)
         else:
-            # prefix = get_prefix(root_last, 0, level)
             result += (prefix + LEAF + entry + '\n')
             prefix_r += STEM
-
-        # # update prefix
-        # prefix_r = prefix
-        # if entry == last_dir:
-        # 	prefix_r += BLANK
-        # else:
-        # 	prefix_r += STEM
 
         entry_with_path = path + '/' + entry
         # if path not specified, entry might not be found
@@ -71,7 +60,6 @@ def tree_helper(path, dir_ct, file_ct, prefix):
 if __name__ == '__main__':
     path = ''
     if len(sys.argv) < 2:
-        # process current directory
         path = os.curdir
     else:
         path = sys.argv[1]
@@ -87,5 +75,5 @@ if __name__ == '__main__':
         file_string = "files"
     else:
         file_string = "file"
-    print(str(dir_ct) + " " + dir_string + ", " \
-        + str(file_ct) + " " + file_string)
+    print(str(dir_ct) + " " + dir_string
+    	 + ", " + str(file_ct) + " " + file_string)
