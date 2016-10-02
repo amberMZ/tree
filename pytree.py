@@ -25,8 +25,8 @@ def tree_helper(path, dir_ct, file_ct, prefix):
     # find last directory
     last_dir = ''
     for entry in entries:
-    	if os.path.isdir(path + '/' + entry):
-    		last_dir = entry
+        if os.path.isdir(path + '/' + entry):
+            last_dir = entry
 
     for i in range(len(entries)):
         # ignore hidden files
@@ -65,15 +65,10 @@ if __name__ == '__main__':
         path = sys.argv[1]
     [result, dir_ct, file_ct] = tree(path)
     print(result)
-    dir_string = ''
-    file_string = ''
-    if dir_ct > 1:
-        dir_string = "directories"
-    else:
+    dir_string = 'directories'
+    file_string = 'files'
+    if dir_ct == 1:
         dir_string = "directory"
-    if file_ct > 1:
-        file_string = "files"
-    else:
+    if file_ct == 1:
         file_string = "file"
-    print(str(dir_ct) + " " + dir_string
-    	 + ", " + str(file_ct) + " " + file_string)
+    print(str(dir_ct) + " " + dir_string + ", " + str(file_ct) + " " + file_string)
