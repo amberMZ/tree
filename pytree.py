@@ -19,7 +19,8 @@ def tree_helper(PATH, level, dir_ct, file_ct):
     entries = os.listdir(PATH)
     last = len(entries)
     for i in range(last):
-        entry = entries[i]
+        entry = PATH + '/' + entries[i]
+        # ignore hidden files
         if str(entry)[0] == '.' :
             continue
         prefix = ''
@@ -35,7 +36,7 @@ def tree_helper(PATH, level, dir_ct, file_ct):
             result += result_r
             dir_ct = dir_ct_r
             file_ct = file_ct_r
-        else:
+        elif os.path.isfile(entry):
             file_ct += 1
     return [result, dir_ct, file_ct]
 
