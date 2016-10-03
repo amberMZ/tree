@@ -4,9 +4,9 @@ import sys
 import os
 
 BLANK = '    '
-STEM = '│   '
-LEAF = '├── '
-LEAF_LAST = '└── '
+STEM = '|   '
+LEAF = '|-- '
+LEAF_LAST = '`-- '
 
 
 def tree(path):
@@ -20,13 +20,7 @@ def tree(path):
 # helper method for recursive calls
 def tree_helper(path, dir_ct, file_ct, prefix):
     result = ''
-    entries = os.listdir(path)
-
-    # find last directory
-    last_dir = ''
-    for entry in entries:
-        if os.path.isdir(path + '/' + entry):
-            last_dir = entry
+    entries = sorted(os.listdir(path), key=lambda e: e.lower())
 
     for i in range(len(entries)):
         # ignore hidden files
